@@ -1,18 +1,24 @@
-var Plugin = require('plugin')
+var Plugin = require('./plugin')
 var Client = require('hangupsjs')
 
+Client.authStdin()
+
 class Hangouts extends Plugin {
-	constructor () {
+	constructor (handle) {
+		super()
+		this.handle = handle
 		this.client = new Client()
-	},
-	authenticate (credentials) {
-		client.connect({creds: Promise.resolve(credentials.token)})
-		setup()
-	},
-	setup () {
-		client.on('chat_message', function () {
-			this.receiveMessage()
+		this.client.on('chat_message', function (message) {
+			handle('message', {message: message})
 		}.bind(this))
+	}
+
+	authenticate (credentials) {
+		this.client.connect({creds: Promise.resolve(credentials.token)}).then(function () { handle('authenticated', {}) })
+	}
+
+	setup () {
+
 	}
 }
 
