@@ -3,9 +3,18 @@ const express = require('express'),
     passport = require('passport'),
     auth = require('./auth'),
     cookieParser = require('cookie-parser'),
-    cookieSession = require('cookie-session');
-const pgp = require('pg-promise');
-const db = pgp('postgres://username:password@host:port/database');
+    cookieSession = require('cookie-session'),
+    MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect("mongodb://localhost/uchat", function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");
+    dbo.createCollection("customers", function(err, res) {
+        if (err) throw err;
+        console.log("Collection created!");
+        db.close();
+    });
+});
 
 auth(passport);
 app.use(passport.initialize());
@@ -18,11 +27,12 @@ app.use(cookieSession({
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-    if (req.session.token) {
+   if (req.session.token) {
         res.cookie('token', req.session.token);
         res.json({
             status: 'session cookie set'
         });
+
     } else {
         res.cookie('token', '')
         res.json({
