@@ -4,6 +4,8 @@ const express = require('express'),
     auth = require('./auth'),
     cookieParser = require('cookie-parser'),
     cookieSession = require('cookie-session');
+const pgp = require('pg-promise');
+const db = pgp('postgres://username:password@host:port/database');
 
 auth(passport);
 app.use(passport.initialize());
