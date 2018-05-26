@@ -10,4 +10,3 @@ CREATE TABLE main (
   services TEXT,
   accounts TEXT
 );
-

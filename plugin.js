@@ -1,24 +1,24 @@
 class Plugin {
-	constructor () {}
-	authenticate () {
+	constructor() { }
+	authenticate() {
 		throw new Error("not implemented")
 	}
-	getChats () {
+	getChats() {
 		throw new Error("not implemented")
 	}
-	createChat (person) {
+	createChat(person) {
 		throw new Error("not implemented")
 	}
-	createGroupChat (people) {
+	createGroupChat(people) {
 		throw new Error("not implemented")
 	}
-	getFriends () {
+	getFriends() {
 		throw new Error("not implemented")
 	}
-	addFriend (person) {
+	addFriend(person) {
 		throw new Error("not implemented")
 	}
-	receiveMessage (message) {
+	receiveMessage(message) {
 		throw new Error("not implemented")
 	}
 }
