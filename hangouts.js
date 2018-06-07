@@ -1,13 +1,13 @@
-var Plugin = require('./plugin')
-var Client = require('hangupsjs')
+var Plugin = require('./plugin');
+var Client = require('hangupsjs');
 
-Client.authStdin()
+Client.authStdin();
 
 class Hangouts extends Plugin {
 	constructor (handle) {
-		super()
-		this.handle = handle
-		this.client = new Client()
+		super();
+		this.handle = handle;
+		this.client = new Client();
 		this.client.on('chat_message', function (message) {
 			handle('message', {message: message})
 		}.bind(this))
@@ -22,4 +22,4 @@ class Hangouts extends Plugin {
 	}
 }
 
-module.exports = Hangouts
+module.exports = Hangouts;
